@@ -1,13 +1,20 @@
-# frontend/Dockerfile
-FROM node:18
+# Use the official Bun image
+FROM oven/bun:latest
 
+# Set the working directory
 WORKDIR /app
 
+# Copy the package files
 COPY package*.json ./
-RUN npm install
 
+# Install dependencies using Bun
+RUN bun install
+
+# Copy the rest of the application code
 COPY . .
 
-RUN npm run build
+# Build the application
+RUN bun run build
 
-CMD ["npm", "run", "dev"]
+# Command to run the development server
+CMD ["bun", "run", "dev"]
